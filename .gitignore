@@ -1,0 +1,7 @@
+#.vscode
+#.idea
+#push.sh
+node_modules
+
+!videos.agc
+
