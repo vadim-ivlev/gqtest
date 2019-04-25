@@ -1,6 +1,15 @@
-h1 Hello World1
 
-.search 
-    label(for="inp0") lab
-    input(type="text", name="mm", value="val")
+form
+    label(for="inp0") GraphQL endpoint. 
+    input#inp0(type="text", name="inp0", value="http://localhost:7700/graphql",)
+    input#btn0(type="button", value="refresh", onclick="getSchema('inp0')")
+    
+    #schema
 
+
+style. 
+    #inp0 { width: 300px;}
+    #schema {border: 1px solid whitesmoke}
+
+
+    

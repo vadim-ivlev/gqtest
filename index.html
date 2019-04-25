@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-    <title>Document</title>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="jquery.json-viewer.js"></script>
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="jquery.json-viewer.css">
+    <title>GraphQL explorer</title>
   </head>
   <body>
-    <h1>Hello World1</h1>
-    <div class="search"> 
-      <label for="inp0">lab</label>
-      <input type="text" name="mm" value="val">
-    </div>
+    <form>
+      <label for="inp0">GraphQL endpoint. </label>
+      <input id="inp0" type="text" name="inp0" value="http://localhost:7700/graphql">
+      <input id="btn0" type="button" value="refresh" onclick="getSchema('inp0')">
+      <div id="schema"></div>
+    </form>
+    <style>
+      #inp0 { width: 300px;}
+      #schema {border: 1px solid whitesmoke}
+    </style>
+    <script src="index.js"></script>
   </body>
 </html>

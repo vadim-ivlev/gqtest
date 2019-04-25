@@ -1,0 +1,11 @@
+
+<form>
+  <label for="inp0">GraphQL endpoint. </label>
+  <input id="inp0" type="text" name="inp0" value="http://localhost:7700/graphql"/>
+  <input id="btn0" type="button" value="refresh" onclick="getSchema('inp0')"/>
+  <div id="schema"></div>
+</form>
+<style>
+  #inp0 { width: 300px;}
+  #schema {border: 1px solid whitesmoke}
+</style>
