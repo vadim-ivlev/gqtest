@@ -1,3 +1,5 @@
+import {*} from "s.js";
+
 
 var schema={};
 

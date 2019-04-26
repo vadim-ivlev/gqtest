@@ -1,43 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/http-vue-loader"></script>
-</head>
+  </head>
 
-<body>
+  <body>
+
+    
+
+    <!-- custom element -->
+    <my-book data-pages="400" data-author="Nietzsche" style="display: block;border: 1px solid red">The Wanderer and His Shadow</my-book>
 
     <div id="app">
-        {{ message }}
+      {{ message }}
     </div>
 
-
     <div id="my-app">
-        <my-component></my-component>
+      <my-component></my-component>
     </div>
 
     <script type="text/javascript">
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!"
+        }
+      });
 
-
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
-            }
-        });
-
-
-        new Vue({
-            el: '#my-app',
-            components: {
-                'my-component': httpVueLoader('my-component.vue')
-            }
-        });
-
-
-        
+      new Vue({
+        el: "#my-app",
+        components: {
+          "my-component": httpVueLoader("my-component.vue")
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>
