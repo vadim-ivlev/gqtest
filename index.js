@@ -1,79 +1,80 @@
-import {*} from "s.js";
 
-
-var schema={};
-
-function getSchema(inputId){
-    var url0 = document.getElementById(inputId).value 
-    var queryString = `
-    query IntrospectionQuery {
-        __schema {
-          queryType {
-            ...FullType
-          }
-          mutationType {
-            name
-          }
-          subscriptionType {
-            name
-          }
-          types {
-            ...FullType
-          }
-          directives {
-            name
-            description
-            locations
-            args {
-              ...InputValue
-            }
-          }
-        }
+var schema = {};
+const queryString = `
+query IntrospectionQuery {
+    __schema {
+      queryType {
+        ...FullType
       }
-      
-      fragment FullType on __Type {
-        kind
+      mutationType {
+        name
+      }
+      subscriptionType {
+        name
+      }
+      types {
+        ...FullType
+      }
+      directives {
         name
         description
-        fields(includeDeprecated: true) {
-          name
-          description
-          args {
-            ...InputValue
-          }
-          type {
-            ...TypeRef
-          }
-          isDeprecated
-          deprecationReason
-        }
-        inputFields {
+        locations
+        args {
           ...InputValue
         }
-        interfaces {
-          ...TypeRef
-        }
-        enumValues(includeDeprecated: true) {
-          name
-          description
-          isDeprecated
-          deprecationReason
-        }
-        possibleTypes {
-          ...TypeRef
-        }
       }
-      
-      fragment InputValue on __InputValue {
-        name
-        description
-        type {
-          ...TypeRef
-        }
-        defaultValue
+    }
+  }
+  
+  fragment FullType on __Type {
+    kind
+    name
+    description
+    fields(includeDeprecated: true) {
+      name
+      description
+      args {
+        ...InputValue
       }
-      
-      fragment TypeRef on __Type {
+      type {
+        ...TypeRef
+      }
+      isDeprecated
+      deprecationReason
+    }
+    inputFields {
+      ...InputValue
+    }
+    interfaces {
+      ...TypeRef
+    }
+    enumValues(includeDeprecated: true) {
+      name
+      description
+      isDeprecated
+      deprecationReason
+    }
+    possibleTypes {
+      ...TypeRef
+    }
+  }
+  
+  fragment InputValue on __InputValue {
+    name
+    description
+    type {
+      ...TypeRef
+    }
+    defaultValue
+  }
+  
+  fragment TypeRef on __Type {
+    kind
+    name
+    ofType {
+      kind
+      name
+      ofType {
         kind
         name
         ofType {
@@ -91,35 +92,29 @@ function getSchema(inputId){
                 ofType {
                   kind
                   name
-                  ofType {
-                    kind
-                    name
-                    ofType {
-                      kind
-                      name
-                    }
-                  }
                 }
               }
             }
           }
         }
       }
-      
+    }
+  }
+  
 
-    `
+`
 
-    $.ajax({
-        type: "POST",
-        url: url0,
-        data: { query:queryString, variables: '{}'},
-        // success: function(response) {$('#schema').text(JSON.stringify(response, null,'  '));},
-        success: function(response) {schema = response; $('#schema').jsonViewer(response, {collapsed: true, rootCollapsable: false});},
-        dataType: 'json'
-        });    
+
+async function getSchema(inputId) {
+    var url0 = document.getElementById(inputId).value
+
+    // schema =  await $.ajax({ url: url0, type: "POST", data: { query:queryString, variables: '{}'},});   
+
+    var resp = await fetch(url0, { method: 'POST', body: JSON.stringify({ query: queryString, variables: '{}' }), })
+    schema = await resp.json()
+
+    $('#schema').jsonViewer(schema, { collapsed: true, rootCollapsable: false })
+    // $('#schema').text(JSON.stringify(response, null,'  '));
 
 }
 
-function askGraphQL(url, queryString, results) {
-    
-}

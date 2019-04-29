@@ -21,6 +21,9 @@
     </div>
 
     <script type="text/javascript">
+    Vue.use(httpVueLoader)
+
+
       var app = new Vue({
         el: "#app",
         data: {
@@ -28,10 +31,12 @@
         }
       });
 
+
+
       new Vue({
         el: "#my-app",
         components: {
-          "my-component": httpVueLoader("my-component.vue")
+          "my-component": "url:my-component.vue"
         }
       });
     </script>
